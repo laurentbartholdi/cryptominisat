@@ -8144,10 +8144,14 @@ picosat_stats (PS * ps)
 	    ps->prefix, picosat_max_bytes_allocated (ps) / (double) (1 << 20));
 }
 
+#ifdef _WIN32
+#define NGETRUSAGE /* mingw does not provide sys/resource.h */
+#endif
+
 #ifndef NGETRUSAGE
 #include <sys/time.h>
 #include <sys/resource.h>
-#include <sys/unistd.h>
+#include <unistd.h>
 #endif
 
 double
